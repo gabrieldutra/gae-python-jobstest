@@ -1,0 +1,53 @@
+<div class="row">
+  <form class="search form-inline text-center" ng-submit="vm.reloadJobs()">
+    <div class="form-group">
+      <label>Descrição</label>
+      <input type="text" class="form-control" ng-model="vm.jobsearch.description" placeholder="Python">
+    </div>
+    <div class="form-group">
+      <label>Localização</label>
+      <input type="text" class="form-control" ng-model="vm.jobsearch.location" placeholder="Belo Horizonte">
+    </div>
+    <!-- <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="vm.jobsearch.fulltime"> Somente integral
+      </label>
+    </div> -->
+    <button type="submit" class="btn btn-primary" ng-hide="vm.loading"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+    <button class="btn btn-primary disabled" ng-show="vm.loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Carregando...</button>
+  </form>
+
+</div>
+<div class="results" ng-hide="vm.loading">
+  <h4>Mostrando <b>{{vm.meta.start+1}} - {{vm.meta.start+vm.meta.count}}</b> de <b>{{vm.meta.totalCount}}</b> vagas</h4>
+  <div class="row table-responsive">
+    <table class="table table-striped table-bordered col-md-12">
+      <thead>
+        <tr>
+          <th class="col-md-4">Vaga</th>
+          <th class="col-md-2">Empresa</th>
+          <th class="col-md-2">Tipo</th>
+          <th class="col-md-2">Localização</th>
+          <th class="col-md-2">Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="job in vm.jobs">
+          <td><a href="#/job/{{job.id}}">{{job.title}}</a></td>
+          <td><p>{{job.company}}</p></td>
+          <td><p>{{job.type}}</p></td>
+          <td><p>{{job.location}}</p></td>
+          <td><p>{{job.date | timeAgo}}</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row text-center">
+    <ul class="pagination">
+      <li ng-class="{'disabled': vm.pg == 1}"><a href="#/home/{{vm.key}}/{{vm.loc}}/{{(vm.pg | num)-1}}">&laquo;</a></li>
+      <li ng-class="{'active': (n+1) == vm.pg}" ng-repeat="n in [vm.meta.pages-1] | makeRange"><a href="#/home/{{vm.key}}/{{vm.loc}}/{{n+1}}">{{n+1}}</a></li>
+      <li ng-class="{'disabled': vm.pg == vm.meta.pages}"><a href="#/home/{{vm.key}}/{{vm.loc}}/{{(vm.pg | num)+1}}">&raquo;</a></li>
+    </ul>
+  </div>
+</div>

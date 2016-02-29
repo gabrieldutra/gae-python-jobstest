@@ -1,0 +1,20 @@
+<div class="row job">
+  <div class="page-header">
+  <h1>{{vm.job.title}} <small>{{vm.job.location}}, {{vm.job.type}}</small></h1>
+</div>
+
+    <div class="thumbnail col-md-2 col-md-offset-5">
+      <img src="{{vm.job.company_logo}}" alt="{{vm.job.company}}">
+      <div class="caption text-center">
+        <h3><a href="{{vm.job.company_url}}" target="_new">{{vm.job.company}}</a></h3>
+      </div>
+    </div>
+
+  <div class="description col-xs-12" ng-bind-html="vm.job.description"></div>
+
+  <div class="jumbotron col-xs-12" ng-bind-html="vm.job.how_to_apply"></div>
+  <div class="col-xs-12">
+      <a href="#" onclick="window.history.back(); return false" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Voltar</a>
+  </div>
+
+</div>

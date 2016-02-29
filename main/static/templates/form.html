@@ -1,0 +1,103 @@
+<div class="row create" ng-show="vm.selectedTab != 'preview' && vm.selectedTab != 'done'">
+  <div class="navig">
+    <ul class="breadcrumb">
+      <li>Criar</li>
+      <li><a href="#" ng-click="vm.selectedTab='preview'" onclick="return false">Pré-visualizar</a></li>
+      <li class="active">Enviar</li>
+    </ul>
+  </div>
+
+
+  <div class="col-xs-12">
+    <form ng-submit="vm.selectedTab='preview'">
+      <h3>Vaga</h3>
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" class="form-control" ng-model="vm.job.title" placeholder="Título">
+      </div>
+      <div class="form-group">
+        <label>Localização</label>
+        <input type="text" class="form-control" ng-model="vm.job.location" placeholder="Localização">
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <select class="form-control" ng-model="vm.job.type_" placeholder="Selecione um tipo">
+          <option value="Part Time">Part Time</option>
+          <option value="Full Time">Full Time</option>
+          <option value="Contract">Contract</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Descrição</label>
+        <textarea rows="20" ng-model="vm.job.description" class="form-control" placeholder="Descrição"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Como aplicar</label>
+        <textarea rows="5" ng-model="vm.job.how_to_apply" class="form-control" placeholder="Como aplicar"></textarea>
+      </div>
+
+      <h3>Empresa</h3>
+
+      <div class="form-group">
+        <label>Nome da empresa</label>
+        <input type="text" class="form-control" ng-model="vm.job.company" placeholder="Nome da empresa">
+      </div>
+
+      <div class="form-group">
+        <label>Logo da empresa</label>
+        <input type="text" class="form-control" ng-model="vm.job.company_logo" placeholder="Nome da empresa">
+      </div>
+
+      <div class="form-group hide">
+        <label for="exampleInputFile">Logo da empresa</label>
+        <input type="file" file-preview>
+        <p class="help-block">Selecione a logo da empresa.</p>
+      </div>
+
+      <div class="form-group">
+        <label>Site da empresa</label>
+        <input type="text" class="form-control" ng-model="vm.job.company_url" placeholder="Site da empresa">
+      </div>
+      <button type="submit" class="btn btn-success">Pré-visualizar <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+    </form>
+  </div>
+</div>
+
+<div class="row preview" ng-show="vm.selectedTab == 'preview'">
+  <div class="navig">
+    <ul class="breadcrumb">
+      <li><a href="#" ng-click="vm.selectedTab='create'" onclick="return false">Criar</a></li>
+      <li>Pré-visualizar</li>
+      <li class="active">Enviar</li>
+    </ul>
+  </div>
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1>{{vm.job.title}} <small>{{vm.job.location}}, {{vm.job.type}}</small></h1>
+    </div>
+
+    <div class="thumbnail col-md-2 col-md-offset-5">
+      <img src="{{vm.job.company_logo}}" alt="{{vm.job.company}}">
+      <div class="caption text-center">
+        <h3><a href="{{vm.job.company_url}}" target="_new">{{vm.job.company}}</a></h3>
+      </div>
+    </div>
+
+    <div class="description col-xs-12" ng-bind-html="vm.job.description"></div>
+
+    <div class="jumbotron col-xs-12" ng-bind-html="vm.job.how_to_apply"></div>
+    <div class="col-xs-12">
+      <a href="#" ng-click="vm.selectedTab='create'" onclick="return false" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Voltar para edição</a>
+      <a href="#" ng-click="vm.postJob()" ng-hide="vm.loading" onclick="return false" id="savebtn" class="btn btn-info"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Salvar</a>
+      <button class="btn btn-info disabled" ng-show="vm.loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Salvando...</button>
+    </div>
+  </div>
+</div>
+
+<div class="row done" ng-show="vm.selectedTab == 'done'">
+  <h3>Sucesso</h3>
+  <p>Vaga enviada com sucesso!</p>
+  <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Voltar</a>
+</div>
